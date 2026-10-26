@@ -1,0 +1,17 @@
+[workspace]
+resolver = "3"
+members = ["crates/vpnui-proto", "crates/vpnui-mockd", "crates/vpnui-tui", "crates/vpnui-daemon"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+wildcard_enum_match_arm = "deny"

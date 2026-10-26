@@ -1,0 +1,15 @@
+[package]
+name = "vpnui-proto"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+thiserror = "2.0.21"
+tokio-util = { version = "0.7.20", features = ["codec"] }

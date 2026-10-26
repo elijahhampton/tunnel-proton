@@ -1,0 +1,21 @@
+[package]
+name = "vpnui-mockd"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = "1.0.104"
+clap = { version = "4.6.7", features = ["derive"] }
+futures = "0.3.34"
+serde_json = "1.0.154"
+thiserror = "2.0.21"
+tokio = { version = "1.53.3", features = ["rt-multi-thread", "macros", "net", "sync", "time", "signal", "io-std", "io-util"] }
+tokio-util = { version = "0.7.20", features = ["codec"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+vpnui-proto = { version = "0.1.0", path = "../vpnui-proto" }

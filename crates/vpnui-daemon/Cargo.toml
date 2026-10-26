@@ -1,0 +1,34 @@
+[package]
+name = "vpnui-daemon"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "vpnuid"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = "1.0.104"
+base64 = "0.23.1"
+clap = { version = "4.6.7", features = ["derive"] }
+futures = "0.3.34"
+nix = { version = "0.31.3", features = ["user", "signal", "process"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+sha2 = "0.11.1"
+thiserror = "2.0.21"
+tokio = { version = "1.53.3", features = ["rt-multi-thread", "macros", "net", "sync", "time", "signal", "io-util", "process"] }
+tokio-util = { version = "0.7.20", features = ["codec"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+vpnui-proto = { version = "0.1.0", path = "../vpnui-proto" }
+zeroize = "1.9.1"
+
+[dev-dependencies]
+crossterm = "0.29.0"
+vpnui-tui = { path = "../vpnui-tui" }

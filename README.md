@@ -1,7 +1,7 @@
-# vpnui
+# tunnel-proton
 
 A terminal UI and a privileged macOS daemon for a personal WireGuard VPN. The daemon, `vpnuid`,
-drives a real WireGuard tunnel from configuration files you download from your own VPN account,
+drives a WireGuard tunnel from configuration files you download from your own VPN account,
 and protects it with a pf-based kill switch. The terminal client, `vpnui`, is unprivileged and
 holds no secrets.
 
@@ -226,23 +226,6 @@ Golden fixtures live in `crates/vpnui-proto/tests/fixtures/`.
 - Any process running as your user can use the socket, including disarming the kill switch.
 - Network changes are detected by polling once a second; recovery can lag by that much.
 
-### Unverified until Tier B
-
-These depend on real macOS behavior and are covered only by the manual checklist:
-
-- pf evaluating `com.apple/000.vpnui` through Apple's `anchor "com.apple/*"`, ahead of Apple's own
-  sub-anchors (`vpnuid doctor` tests this).
-- `pfctl -E` / `-X` token semantics, `pfctl -F states`, and atomic `pfctl -a ... -f -` reloads.
-- `route -n get default` parsing; `route add`/`delete` behavior and error text ("File exists",
-  "not in table"); IPv6 split routes on a `utun`.
-- `ifconfig` address, MTU, and up semantics on `utun`, following wg-quick's darwin logic.
-- The DNS override: `State:/Network/Service/<id>/DNS` held by a `scutil` session with
-  `add ... temporary`, its precedence in `scutil --dns`, and its removal when scutil exits.
-- wireguard-go `-f utun`, `WG_TUN_NAME_FILE`, UAPI socket timing, and exit on socket removal.
-- Orphan detection through `ps -o comm=`, and `launchctl bootstrap`/`bootout`.
-- Sleep/wake detection from the wall-clock gap, and the IP check running curl as `nobody`.
-- Socket ownership (root:your-gid, 0660) and peer-credential checks on a real install.
-
 ## Development
 
 ```sh
@@ -255,4 +238,3 @@ VPNUID_RANDOM_SEED=65 cargo test -p vpnui-daemon --lib randomized      # replay 
 
 `unsafe` is forbidden; `unwrap`/`expect` are denied outside tests; matches on state enums may not
 use wildcards. Judgment calls are in [DECISIONS.md](DECISIONS.md).
-# tunnel-proton
